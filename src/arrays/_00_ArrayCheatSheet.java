@@ -18,6 +18,7 @@ public class _00_ArrayCheatSheet {
 			System.out.println(ArrayCheatSheets);
 		}
 		int smallest = 101;
+		int largest = -1;
 		// 6. make an array of 50 integers
 
 		int[] fiftyintegers = new int[50];
@@ -35,12 +36,15 @@ public class _00_ArrayCheatSheet {
 			if (fiftyInteger < smallest) {
 				smallest = fiftyInteger;
 			}
+			if (fiftyInteger > largest) {
+				largest = fiftyInteger;
+			}
 
 			System.out.println(fiftyInteger);
 
 		}
 		System.out.println(smallest);
-
+System.out.println(largest);
 		// 9 print the entire array to see if step 8 was correct
 
 		// 10. print the largest number in the array.
