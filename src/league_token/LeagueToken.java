@@ -8,5 +8,5 @@ public class LeagueToken {
 		TokenHacker hacker = new TokenHacker();
 		hacker.hack();
 	}
-}
+}    
 // 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

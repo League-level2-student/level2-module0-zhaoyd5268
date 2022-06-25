@@ -1,4 +1,5 @@
 package arrays;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -47,73 +48,86 @@ import processing.core.PImage;
  */
 
 public class _03_VanGogh extends PApplet {
-    PImage canvas;
-    PImage paintbrushCursor;
-    boolean initializeCanvas = true;
-    
-    /*
-     * Write your code below
-     */
-    Brush brush;
-    
-    void initializePaintings() {
-        
-    }
-    
-    void selectNextPainting() {
-        
-    }
+	PImage canvas;
+	PImage paintbrushCursor;
+	boolean initializeCanvas = true;
 
-    @Override
-    public void settings() {
-        // Arbitrary initial size.
-        // These values are changed when the first painting is loaded in setup().
-        size(800, 600);
-    }
+	/*
+	 * Write your code below
+	 */
+	PImage[] PImage;
+	int imagetracking;
+	Brush brush;
 
-    @Override
-    public void setup() {
-        surface.setResizable(true);
-        
-        canvas = loadImage("canvas.jpg");
-        
-        brush = new Brush(this);
+	void initializePaintings() {
+		imagetracking = 0;
+		PImage = new PImage[4];
+		PImage[0] = loadImage("starryNight.jpg");
+		PImage[1] = loadImage("strawHatPortrait.jpg");
+		PImage[2] = loadImage("painterOnRoad.jpg");
+		PImage[3] = loadImage("wheatField.jpg");
+		brush.setNewPainting(PImage[imagetracking]);
+	}
 
-        paintbrushCursor = loadImage("paintbrushCur.png");
-        paintbrushCursor.resize(22 * 2, 28 * 2);
-        cursor(paintbrushCursor);
+	void selectNextPainting() {
+		if (imagetracking > 3) {
+			imagetracking = 0;
+		} else {
+			imagetracking+=1;
+		}
+	brush.setNewPainting(PImage[imagetracking]);
+	}
 
-        initializePaintings();
-    }
+	@Override
+	public void settings() {
+		// Arbitrary initial size.
+		// These values are changed when the first painting is loaded in setup().
+		size(800, 600);
+	}
 
-    @Override
-    public void draw() {
-        if (initializeCanvas) {
-            canvas.resize(width, height);
-            image(canvas, 0, 0);
-            initializeCanvas = false;
-        }
+	@Override
+	public void setup() {
+		surface.setResizable(true);
 
-        brush.update();
-        brush.draw();
-    }
+		canvas = loadImage("canvas.jpg");
 
-    @Override
-    public void keyPressed() {
-        if (keyPressed) {
-            if (key == 'r') {
-                image(canvas, 0, 0);
-            } else if (key == 32) {
-                // SPACE key pressed--go to next painting
-                selectNextPainting();
+		brush = new Brush(this);
 
-                //canvas.resize(width, height);
-                initializeCanvas = true;
-            }
-        }
-    }
+		paintbrushCursor = loadImage("paintbrushCur.png");
+		paintbrushCursor.resize(22 * 2, 28 * 2);
+		cursor(paintbrushCursor);
 
-    public static void main(String[] args) {
-        PApplet.main(_03_VanGogh.class.getName());
-    }
+		initializePaintings();
+	}
+
+	@Override
+	public void draw() {
+		if (initializeCanvas) {
+			canvas.resize(width, height);
+			image(canvas, 0, 0);
+			initializeCanvas = false;
+		}
+
+		brush.update();
+		brush.draw();
+	}
+
+	@Override
+	public void keyPressed() {
+		if (keyPressed) {
+			if (key == 'r') {
+				image(canvas, 0, 0);
+			} else if (key == 32) {
+				// SPACE key pressed--go to next painting
+				selectNextPainting();
+
+				// canvas.resize(width, height);
+				initializeCanvas = true;
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		PApplet.main(_03_VanGogh.class.getName());
+	}
 }
